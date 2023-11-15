@@ -1,0 +1,36 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "phoneNumber": "1234567890",
+      "email": "john@doe.com",
+      "address": "21 Jump St"
+    },
+    {
+      "id": 2,
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "phoneNumber": "0987654321",
+      "email": "jane@doe.com",
+      "address": "22 Jump St"
+    },
+    {
+      "firstName": "Baby",
+      "lastName": "Doe",
+      "phoneNumber": "5678901234",
+      "email": "baby@doe.com",
+      "address": "1 Jump St",
+      "id": 3
+    },
+    {
+      "firstName": "A",
+      "lastName": "B",
+      "phoneNumber": "214234352",
+      "email": "a@b.com",
+      "address": "23 ernwejef",
+      "id": 4
+    }
+  ]
+}
