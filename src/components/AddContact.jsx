@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import PrimaryButton from "./PrimaryButton";
 
 function AddContact() {
   const {
@@ -42,6 +43,7 @@ function AddContact() {
           <button type="submit">Add</button>
         </div>
       </form>
+      <PrimaryButton type="outline-primary" text="Back" link="/" />
     </>
   );
 }
