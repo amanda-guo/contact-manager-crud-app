@@ -4,13 +4,25 @@ import { Table } from "react-bootstrap";
 import PrimaryButton from "./PrimaryButton";
 import Container from "react-bootstrap/Container";
 import DeleteContact from "./DeleteContact";
+import ViewDetails from "./ViewDetails";
 
 function ContactList() {
   const [contacts, setContacts] = useState([]);
   const [error, setError] = useState("");
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+
+  const reload = () => window.location.reload();
+
+  const handleShowDelete = () => setShowDelete(true);
+  const handleCloseDelete = (deleted) => {
+    setShowDelete(false);
+    if (deleted) {
+      reload();
+    }
+  };
+  const handleShowDetails = () => setShowDetails(true);
+  const handleCloseDetails = () => setShowDetails(false);
 
   useEffect(() => {
     axios
@@ -42,8 +54,8 @@ function ContactList() {
             {!error &&
               contacts.map((item, i) => {
                 return (
-                  <tr key={i}>
-                    <td>{i}</td>
+                  <tr key={item?.id}>
+                    <td>{i + 1}</td>
                     <td>{item?.firstName}</td>
                     <td>{item?.lastName}</td>
                     <td>{item?.phoneNumber}</td>
@@ -53,7 +65,12 @@ function ContactList() {
                       <PrimaryButton
                         type="outline-primary"
                         text="View Details"
-                        link="/"
+                        action={handleShowDetails}
+                      />
+                      <ViewDetails
+                        show={showDetails}
+                        onClose={handleCloseDetails}
+                        contact={item}
                       />
                       <PrimaryButton
                         type="outline-primary"
@@ -63,9 +80,13 @@ function ContactList() {
                       <PrimaryButton
                         type="outline-danger"
                         text="Delete"
-                        action={handleShow}
+                        action={handleShowDelete}
                       />
-                      <DeleteContact show={show} onClose={handleClose} />
+                      <DeleteContact
+                        show={showDelete}
+                        onClose={handleCloseDelete}
+                        id={item?.id}
+                      />
                     </td>
                   </tr>
                 );

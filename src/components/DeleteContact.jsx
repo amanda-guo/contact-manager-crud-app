@@ -1,25 +1,48 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-
-// CURRENTLY DOING THIS!!!!!!!
-// https://stackoverflow.com/questions/64955887/how-can-i-open-a-rect-bootstrap-modal-dialog-from-another-component
+import axios from "axios";
 
 function DeleteContact(props) {
-  const { show, onClose } = props;
+  const { show, onClose, id } = props;
+
+  console.log("contact id");
+  console.log(id);
+
+  const onDelete = (id) => {
+    axios
+      .delete(`http://localhost:5000/contacts/${id}`)
+      .then((res) => {
+        console.log(res);
+        console.log(`Deleted contact with ID ${id}`);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    onClose(true);
+  };
 
   return (
     <>
-      <Modal show={show} onHide={onClose}>
+      <Modal
+        show={show}
+        onHide={() => onClose(false)}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        className="delete-modal"
+      >
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Delete Contact</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          Are you sure you want to delete this contact? {id}
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={onClose}>
-            Close
+          <Button variant="secondary" onClick={() => onClose(false)}>
+            Cancel
           </Button>
-          <Button variant="primary" onClick={onClose}>
-            Save Changes
+          <Button variant="danger" onClick={() => onDelete(id)}>
+            Delete
           </Button>
         </Modal.Footer>
       </Modal>

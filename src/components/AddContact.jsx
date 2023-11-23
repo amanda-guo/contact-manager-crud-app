@@ -115,7 +115,7 @@ function AddContact() {
           </div>
           <Row>
             <Col className="d-flex justify-content-start">
-              <PrimaryButton type="outline-primary" text="Back" link="/" />
+              <PrimaryButton type="secondary" text="Back" link="/" />
             </Col>
             <Col className="d-flex justify-content-end">
               <div className="form-control">
