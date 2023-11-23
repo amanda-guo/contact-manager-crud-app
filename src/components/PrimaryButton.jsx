@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function PrimaryButton({ type, text, link }) {
+function PrimaryButton({ type, text, link, action }) {
   let navigate = useNavigate();
   let path = link;
   const routeChange = () => {
@@ -12,7 +12,7 @@ function PrimaryButton({ type, text, link }) {
 
   return (
     <>
-      <Button variant={type} onClick={routeChange}>
+      <Button variant={type} onClick={action ? action : routeChange}>
         {text}
       </Button>{" "}
     </>

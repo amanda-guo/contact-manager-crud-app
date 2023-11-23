@@ -8,12 +8,14 @@ import Container from "react-bootstrap/Container";
 function FormExample() {
   const [validated, setValidated] = useState(false);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, data) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
     }
+    console.log("data");
+    console.log(data);
 
     setValidated(true);
   };

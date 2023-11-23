@@ -3,10 +3,14 @@ import axios from "axios";
 import { Table } from "react-bootstrap";
 import PrimaryButton from "./PrimaryButton";
 import Container from "react-bootstrap/Container";
+import DeleteContact from "./DeleteContact";
 
 function ContactList() {
   const [contacts, setContacts] = useState([]);
   const [error, setError] = useState("");
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   useEffect(() => {
     axios
@@ -38,7 +42,7 @@ function ContactList() {
             {!error &&
               contacts.map((item, i) => {
                 return (
-                  <tr>
+                  <tr key={i}>
                     <td>{i}</td>
                     <td>{item?.firstName}</td>
                     <td>{item?.lastName}</td>
@@ -59,8 +63,9 @@ function ContactList() {
                       <PrimaryButton
                         type="outline-danger"
                         text="Delete"
-                        link="/"
+                        action={handleShow}
                       />
+                      <DeleteContact show={show} onClose={handleClose} />
                     </td>
                   </tr>
                 );
