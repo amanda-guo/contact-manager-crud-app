@@ -25,22 +25,6 @@
       "id": 3
     },
     {
-      "firstName": "Test",
-      "lastName": "Doe",
-      "phoneNumber": "4560445604",
-      "email": "tet@doe.com",
-      "address": "34 dfoe st",
-      "id": 4
-    },
-    {
-      "firstName": "abc",
-      "lastName": "doe",
-      "phoneNumber": "0987654321",
-      "email": "abc@doe.com",
-      "address": "334 abc st",
-      "id": 5
-    },
-    {
       "firstName": "elmo",
       "lastName": "monster",
       "phoneNumber": "2358473453",
@@ -57,12 +41,12 @@
       "id": 7
     },
     {
-    "firstName": "evil",
-    "lastName": "kermit",
-    "phoneNumber": "4496344963",
-    "email": "evil@kermit.com",
-    "address": "34 evil st",
-    "id": 8
-  }
+      "firstName": "evil",
+      "lastName": "kermit",
+      "phoneNumber": "4496344963",
+      "email": "evil@kermit.com",
+      "address": "34 evil st",
+      "id": 8
+    }
   ]
 }

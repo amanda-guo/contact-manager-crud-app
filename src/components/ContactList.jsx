@@ -11,17 +11,24 @@ function ContactList() {
   const [error, setError] = useState("");
   const [showDelete, setShowDelete] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [selectedContact, setSelectedContact] = useState(null);
 
   const reload = () => window.location.reload();
 
-  const handleShowDelete = () => setShowDelete(true);
+  const handleShowDelete = (contact) => {
+    setShowDelete(true);
+    setSelectedContact(contact);
+  };
   const handleCloseDelete = (deleted) => {
     setShowDelete(false);
     if (deleted) {
       reload();
     }
   };
-  const handleShowDetails = () => setShowDetails(true);
+  const handleShowDetails = (contact) => {
+    setShowDetails(true);
+    setSelectedContact(contact);
+  };
   const handleCloseDetails = () => setShowDetails(false);
 
   useEffect(() => {
@@ -52,26 +59,28 @@ function ContactList() {
           </thead>
           <tbody>
             {!error &&
-              contacts.map((item, i) => {
+              contacts.map((item) => {
                 return (
-                  <tr key={item?.id}>
-                    <td>{i + 1}</td>
-                    <td>{item?.firstName}</td>
-                    <td>{item?.lastName}</td>
-                    <td>{item?.phoneNumber}</td>
-                    <td>{item?.email}</td>
-                    <td>{item?.address}</td>
+                  <tr key={item.id}>
+                    <td>{item.id}</td>
+                    <td>{item.firstName}</td>
+                    <td>{item.lastName}</td>
+                    <td>{item.phoneNumber}</td>
+                    <td>{item.email}</td>
+                    <td>{item.address}</td>
                     <td>
                       <PrimaryButton
                         type="outline-primary"
                         text="View Details"
-                        action={handleShowDetails}
+                        action={() => handleShowDetails(item)}
                       />
-                      <ViewDetails
-                        show={showDetails}
-                        onClose={handleCloseDetails}
-                        contact={item}
-                      />
+                      {showDetails && (
+                        <ViewDetails
+                          show={showDetails}
+                          onClose={handleCloseDetails}
+                          contact={selectedContact}
+                        />
+                      )}
                       <PrimaryButton
                         type="outline-primary"
                         text="Edit"
@@ -80,13 +89,15 @@ function ContactList() {
                       <PrimaryButton
                         type="outline-danger"
                         text="Delete"
-                        action={handleShowDelete}
+                        action={() => handleShowDelete(item)}
                       />
-                      <DeleteContact
-                        show={showDelete}
-                        onClose={handleCloseDelete}
-                        id={item?.id}
-                      />
+                      {showDelete && (
+                        <DeleteContact
+                          show={showDelete}
+                          onClose={handleCloseDelete}
+                          id={selectedContact.id}
+                        />
+                      )}
                     </td>
                   </tr>
                 );
