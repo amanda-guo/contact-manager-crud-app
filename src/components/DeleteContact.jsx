@@ -11,11 +11,11 @@ function DeleteContact(props) {
       .then((res) => {
         console.log(res);
         console.log(`Deleted contact with ID ${id}`);
+        onClose(true);
       })
       .catch((error) => {
         console.error(error);
       });
-    onClose(true);
   };
 
   return (

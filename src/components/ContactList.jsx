@@ -5,12 +5,14 @@ import PrimaryButton from "./PrimaryButton";
 import Container from "react-bootstrap/Container";
 import DeleteContact from "./DeleteContact";
 import ViewDetails from "./ViewDetails";
+import EditContact from "./EditContact";
 
 function ContactList() {
   const [contacts, setContacts] = useState([]);
   const [error, setError] = useState("");
   const [showDelete, setShowDelete] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
   const [selectedContact, setSelectedContact] = useState(null);
 
   const reload = () => window.location.reload();
@@ -30,6 +32,16 @@ function ContactList() {
     setSelectedContact(contact);
   };
   const handleCloseDetails = () => setShowDetails(false);
+  const handleShowEdit = (contact) => {
+    setShowEdit(true);
+    setSelectedContact(contact);
+  };
+  const handleCloseEdit = (edited) => {
+    setShowEdit(false);
+    if (edited) {
+      reload();
+    }
+  };
 
   useEffect(() => {
     axios
@@ -84,8 +96,15 @@ function ContactList() {
                       <PrimaryButton
                         type="outline-primary"
                         text="Edit"
-                        link="/"
+                        action={() => handleShowEdit(item)}
                       />
+                      {showEdit && (
+                        <EditContact
+                          show={showEdit}
+                          onClose={handleCloseEdit}
+                          contact={selectedContact}
+                        />
+                      )}
                       <PrimaryButton
                         type="outline-danger"
                         text="Delete"
