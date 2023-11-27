@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-// TODO: fix the bug that closes the modal on incorrect input
+// Todo: outstanding bug of extra key (contact's id) being added to the data after an update/patch request
 
 function EditContact(props) {
   const { show, onClose, contact } = props;
@@ -147,11 +147,7 @@ function EditContact(props) {
             <Button variant="secondary" onClick={() => onClose(false)}>
               Cancel
             </Button>
-            <Button
-              type="submit"
-              variant="primary"
-              onClick={() => onSave(contact.id)}
-            >
+            <Button type="submit" variant="primary">
               Save
             </Button>
           </Modal.Footer>

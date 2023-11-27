@@ -1,6 +1,8 @@
-import { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Button from "react-bootstrap/Button";
 import PrimaryButton from "./PrimaryButton";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -8,7 +10,16 @@ import Col from "react-bootstrap/Col";
 import "./AddContact.css";
 
 function AddContact() {
-  const [successMsg, setSuccessMsg] = useState("");
+  let navigate = useNavigate();
+  const path = `/`;
+  const userMssg = {
+    status: "success",
+    type: "add",
+  };
+  const routeChange = () => {
+    navigate(path, { state: userMssg });
+  };
+
   const {
     register,
     handleSubmit,
@@ -22,8 +33,8 @@ function AddContact() {
       .then((res) => {
         console.log(res);
         console.log(res.data);
-        setSuccessMsg("Contact added successfully.");
         reset();
+        routeChange();
       })
       .catch((error) => {
         console.log(error);
@@ -35,7 +46,6 @@ function AddContact() {
       <Container>
         <h1>Add a Contact</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {successMsg && <p className="success-msg">{successMsg}</p>}
           <div className="form-control">
             <label>First Name</label>
             <br></br>
@@ -119,7 +129,9 @@ function AddContact() {
             </Col>
             <Col className="d-flex justify-content-end">
               <div className="form-control">
-                <button type="submit">Add</button>
+                <Button type="submit" variant="primary">
+                  Add Contact
+                </Button>
               </div>
             </Col>
           </Row>
