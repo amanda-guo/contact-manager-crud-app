@@ -3,14 +3,15 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Toast from "react-bootstrap/Toast";
 
+// ToDo: once redux is integrated, can get this working
+
 const successAddMssg = "Contact Successfully Added.";
 const successEditMssg = "Contact Successfully Updated.";
 const successDeleteMssg = "Contact Successfully Deleted.";
 const failureMssg = "Failure to be added";
 
 function ToastAlert(props) {
-  const { type } = props;
-  const [show, setShow] = useState(false);
+  const { showState, onClose, type } = props;
   const [mssg, setMssg] = useState("");
 
   if (type === "add") {
@@ -26,7 +27,12 @@ function ToastAlert(props) {
   return (
     <Row>
       <Col xs={6}>
-        <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide>
+        <Toast
+          onClose={() => onClose(false)}
+          show={showState}
+          delay={3000}
+          autohide
+        >
           <Toast.Body>{mssg}</Toast.Body>
         </Toast>
       </Col>

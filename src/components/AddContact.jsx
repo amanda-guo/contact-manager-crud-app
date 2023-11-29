@@ -12,12 +12,8 @@ import "./AddContact.css";
 function AddContact() {
   let navigate = useNavigate();
   const path = `/`;
-  const userMssg = {
-    status: "success",
-    type: "add",
-  };
   const routeChange = () => {
-    navigate(path, { state: userMssg });
+    navigate(path);
   };
 
   const {

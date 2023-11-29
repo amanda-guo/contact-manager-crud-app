@@ -1,19 +1,11 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
 import ContactList from "./ContactList";
 import PrimaryButton from "./PrimaryButton";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import ToastAlert from "./ToastAlert";
-
-// TODO: error with the toast message displaying - too many rerenders...
 
 function Home() {
-  const location = useLocation();
-  const mssg = location.state;
-  console.log("mssg");
-  console.log(mssg);
   return (
     <>
       <Container>
@@ -27,9 +19,6 @@ function Home() {
               text="Add Contact"
               link="/addcontact"
             />
-            {/* {mssg && mssg.status === "success" && (
-              <ToastAlert type={mssg.type} />
-            )} */}
           </Col>
         </Row>
         <Row>
